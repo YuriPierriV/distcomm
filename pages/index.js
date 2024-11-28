@@ -1,115 +1,114 @@
-import Image from "next/image";
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const openModal = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalContent("");
+  };
+
+  const navigateToApiRest = () => {
+    router.push("/apirest");
+  };
+
+  return (
+    <main className="container mx-auto min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+      <div className="max-w-md w-full bg-white border border-gray-200 rounded-lg shadow-lg transition-shadow p-6 flex flex-col">
+        <p className="text-gray-600 leading-relaxed">
+          Este site é um guia prático para explorar dois tipos de comunicação em
+          sistemas distribuídos:
+        </p>
+        <div className="grid grid-cols-1 justify-center xl:grid-cols-2 py-4 gap-2">
+          <div className="border border-solid border-gray-200 rounded-2xl transition-all duration-500">
+            <div className="p-4 justify-center align-middle self-center">
+              <h4 className="text-base font-semibold text-gray-900 mb-2 capitalize transition-all duration-500">
+                Cliente-Servidor
+              </h4>
+              <p className="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 mb-5">
+                Base para um sistema distribuído
+              </p>
+              <button
+                className="bg-blue-500 shadow-sm rounded-full py-2 px-5 text-xs text-white font-semibold"
+                onClick={() => openModal("Cliente-Servidor")}
+              >
+                Saiba Mais
+              </button>
+            </div>
+          </div>
+          <div className="border border-solid border-gray-200 rounded-2xl transition-all duration-500">
+            <div className="p-4">
+              <h4 className="text-base font-semibold text-gray-900 mb-2 capitalize transition-all duration-500">
+                Filas de Mensagens
+              </h4>
+              <p className="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 mb-5">
+                Forma mais primitiva e comum, próxima à rede
+              </p>
+              <button
+                className="bg-blue-500 shadow-sm rounded-full py-2 px-5 text-xs text-white font-semibold"
+                onClick={() => openModal("Filas de Mensagens")}
+              >
+                Saiba Mais
+              </button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Botão Principal */}
+        <button
+          className="px-6 py-3 bg-blue-500 text-white font-medium rounded-sm hover:bg-blue-600 transition-colors self-center"
+          onClick={navigateToApiRest}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          Começar Agora
+        </button>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-md">
+            <h3 className="text-xl font-semibold mb-4">{modalContent}</h3>
+            <h4 className="text-lg font-medium text-gray-700 mb-3">
+              {modalContent === "Cliente-Servidor"
+                ? "Utilizaremos API Rest"
+                : "Utilizaremos o MQTT Broker"}
+            </h4>
+            <p className="text-gray-600">
+              {modalContent === "Cliente-Servidor"
+                ? "No nível mais básico, uma API é um mecanismo que permite que uma aplicação ou serviço acesse um recurso dentro de outra aplicação ou serviço. A aplicação ou o serviço que acessa os recursos é o cliente e a aplicação ou serviço que contém o recurso é o servidor. Algumas APIs, como SOAP ou XML-RPC, impõem uma estrutura rígida aos desenvolvedores. Mas os desenvolvedores podem criar APIs REST utilizando praticamente qualquer linguagem de programação e aceitar uma variedade de formatos de dados. O único requisito é que sigam os seis princípios de design REST, também conhecidos como restrições de arquitetura."
+                : "O MQTT Broker é um componente central na arquitetura do protocolo MQTT (Message Queuing Telemetry Transport), que é amplamente utilizado para comunicação em redes de dispositivos conectados, especialmente na Internet das Coisas (IoT). O broker atua como um intermediário que recebe mensagens de um ou mais clientes e as encaminha para outros clientes que estão inscritos em tópicos específicos. Essa estrutura permite uma comunicação eficiente e escalável entre dispositivos, facilitando a troca de informações em tempo real."}
+            </p>
+            <button
+              className="mt-4 gap-2 text-black font-medium rounded-sm flex items-center transition-colors"
+              onClick={closeModal}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-3"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                />
+              </svg>
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
+    </main>
   );
 }

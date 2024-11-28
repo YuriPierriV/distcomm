@@ -3,19 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --border: 223, 223, 223; /* Neutral border color */
+  --input: 255, 255, 255; /* Input background color */
+  --ring: 102, 145, 255; /* Accent ring for focus */
+  --background: 245, 245, 245; /* Default background */
+  --foreground: 30, 30, 30; /* Default text color */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Primary color palette */
+  --primary: 34, 124, 230; /* Primary brand color */
+  --primary-foreground: 255, 255, 255; /* Text on primary */
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Secondary color palette */
+  --secondary: 96, 99, 235; /* Secondary brand color */
+  --secondary-foreground: 255, 255, 255; /* Text on secondary */
+
+  /* Destructive color palette (errors, warnings) */
+  --destructive: 220, 53, 69; /* Red for danger */
+  --destructive-foreground: 255, 255, 255; /* Text on destructive */
+
+  /* Muted tones for subtle elements */
+  --muted: 200, 200, 200; /* Muted backgrounds */
+  --muted-foreground: 100, 100, 100; /* Text on muted */
+
+  /* Accent colors for highlights */
+  --accent: 255, 204, 77; /* Accent color (yellow) */
+  --accent-foreground: 40, 40, 40; /* Text on accent */
+
+  /* Popover (dropdown, tooltips) */
+  --popover: 250, 250, 250; /* Popover background */
+  --popover-foreground: 50, 50, 50; /* Text on popover */
+
+  /* Cards and containers */
+  --card: 255, 255, 255; /* Card background */
+  --card-foreground: 20, 20, 20; /* Text on card */
+
+  /* Border radius */
+  --radius: 8px; /* Base border radius */
 }
