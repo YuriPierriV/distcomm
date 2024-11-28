@@ -11,6 +11,9 @@ const MAX_TOPICS = 10; // Limite de tópicos
 
 export default function handler(req, res) {
   const { method } = req;
+  res.setHeader("Set-Cookie", [
+    `__vercel_live_token=seu_token_aqui; HttpOnly; Secure; SameSite=None; Path=/`,
+  ]);
 
   switch (method) {
     case "GET":
